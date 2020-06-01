@@ -1,0 +1,137 @@
+{% extends "home/base.html" %}
+
+{% block title %}
+  Cesar Descifrar
+{% endblock %}
+
+{% block content %}
+
+<div class="container">
+  <div class="accordion" id="contrae">
+  <div class="card">
+      <div class="card-header" id="headingOne">
+      <h2 class="mb-0">
+        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+            <h4 class="display-6 ">Desencriptacion del método Cesar.</h4>
+        </button>
+      </h2>
+    </div>
+      {% if error or error1 %}
+        <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#contrae">
+      {% else %}
+        <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#contrae">
+      {% endif %}
+      <div class="card-body">
+        <p class="lead">
+          Obtiene el mensaje oculto.
+          <br>
+          Ya sea teniendo la clave de numero de desplazamientos en el alfabeto o probando las 26 posibles combinaciones.
+        </p><strong>Ten en cuenta que la letra 'Ñ' no se toma en cuenta.</strong>
+      </div>
+    </div>
+  </div>
+
+
+
+  <div class="card">
+    <div class="card-header" id="headingTwo">
+      <h2 class="mb-0">
+        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+          <h4 class="display-6 ">Ver Código.</h4>
+        </button>
+      </h2>
+    </div>
+    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#contrae">
+      <div class="card-body">
+        <code>
+          <strong>
+              <pre>
+import string
+def cesarDecrypted(encriptado, key):
+  upper = list(string.ascii_uppercase)
+  error  = False if (key > 0  or key < 26) else True
+  error1 = False if (len(mensaje) > 0) else True:
+  if (error or error1):
+    return "Error en alguno de los parametros"
+  mensajes = []
+  if (key == 27):
+    for i in range(0,26):
+      decryp = ""
+      for x in encryp:
+        decryp += " " if (x == " ") else upper[ (upper.index(x) - i) % len(upper) ]
+      mensajes.append([decryp, i])
+  else:
+    decryp = ""
+    for x in encryp:
+      decryp += " " if (x == " ") else upper[ (upper.index(x) - recorrido) % len(upper) ]
+    mensajes.append([decryp, recorrido])
+              </pre>
+            </strong>
+        </code>
+      </div>
+    </div>
+  </div>
+
+
+
+  <div class="card">
+    {% if error or error1 %}
+      <div class="card-header" id="headingOne">
+    {% else %}
+      <div class="card-header" id="headingThree">
+    {% endif %}
+      <h2 class="mb-0">
+        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+          <h4 class="display-6 ">Pruébame.</h4>
+        </button>
+      </h2>
+    </div>
+      {% if error or error1 %}
+        <div id="collapseThree" class="collapse show" aria-labelledby="headingThree" data-parent="#contrae">
+      {% else %}
+        <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#contrae">
+      {% endif %}
+      <div class="card-body">
+        <div class="container text-center">
+          <form action="{% url 'cesarDecrypted' %}" method="post">{% csrf_token %}
+            <div class="col-sm-4 offset-sm-4 ">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">Key/Desplazamiento:</span>
+                </div>
+                <select name="desplazamiento" class="custom-select">
+                  <option selected>Key: </option>
+                  <option value="27">Probar Todas</option>
+                  {% for x in desplaza %}
+                    <option value="{{x}}">{{x}}</option>
+                  {% endfor %}
+                </select>
+              </div>
+              {% if error %}
+              <p class="alert alert-warning">Selecciona una LLave o probar todas.</p>
+              {% endif %}
+            </div>
+            <br>
+            <div class="col-sm-4 offset-sm-4 ">
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text">Mensaje:</span>
+              </div>
+              <textarea class="form-control" aria-label="With textarea" placeholder="mensaje encriptado" name="mensaje"></textarea>
+            </div>
+            {% if error1 %}
+            <p class="alert alert-warning">El mensaje no puede estar vacio.</p>
+            {% endif %}
+            </div>
+            <br>
+            <div class="col-md-6 offset-md-3 ">
+              <input type="submit" value="Generar Password" class="btn btn-primary">
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+{% endblock %}

@@ -1,0 +1,66 @@
+{% extends "home/base.html" %}
+
+{% block title %}
+  Seguridad Informatica
+{% endblock %}
+
+
+{% block content %}
+<br>
+<div class="container flex-container">
+  <div class="card w-20" > <!-- cesar   -->
+      {% load static %}
+      <img src="{% static 'home/img/cifradoCesar.png' %}" class="card-img-top" alt="Cifrado Cesar">
+      <div class="card-body">
+        <h5 class="card-title">Cifrado Cesar</h5><hr>
+        <p class="card-text"> <small class="text-muted"> Se sustituye cada letra en un mensaje por otra letra del alfabeto. </small></p>
+        <a href="{% url 'cesar' %}" class="btn btn-primary">Leer mas</a>
+      </div>
+  </div>
+
+
+  <div class="card w-20" > <!-- cesar decryp   -->
+      {% load static %}
+      <img src="{% static 'home/img/cifradoCesar.png' %}" class="card-img-top" alt="Descifrado Cesar">
+      <div class="card-body">
+        <h5 class="card-title">Descifrado del algortimo Cesar</h5><hr>
+        <p class="card-text"> <small class="text-muted"> Se descifra el algorimo cesar. </small></p>
+        <a href="{% url 'cesarDecrypted' %}" class="btn btn-primary">Leer mas</a>
+      </div>
+  </div>
+
+
+  <div class="card w-20" > <!-- generador password seguros   -->
+      {% load static %}
+      <img src="{% static 'home/img/password.jpg' %}" class="card-img-top" alt="Generador de password">
+      <div class="card-body">
+        <h5 class="card-title">Generador de Password Seguros</h5><hr>
+        <p class="card-text"> <small class="text-muted"> Se genera una cadena aleatoria con los parametros establecidos </small></p>
+        <a href="{% url 'genPassword' %}" class="btn btn-primary">Leer mas</a>
+      </div>
+  </div>
+
+  <div class="card w-20" > <!-- Transposicion   -->
+      {% load static %}
+      <img src="{% static 'home/img/transpo.png' %}" class="card-img-top" alt="Generador de password">
+      <div class="card-body">
+        <h5 class="card-title">Cifrado por Transposición.</h5><hr>
+        <p class="card-text"> <small class="text-muted">
+          Se utiliza una Matriz cuadrada de nxn para cifrar un texto.
+         </small></p>
+        <a href="{% url 'transposicionEncryp' %}" class="btn btn-primary">Leer mas</a>
+      </div>
+  </div>
+
+  <div class="card w-20" > <!-- Transposicion Decryp   -->
+      {% load static %}
+      <img src="{% static 'home/img/transpo.png' %}" class="card-img-top" alt="Generador de password">
+      <div class="card-body">
+        <h5 class="card-title">Descifrado del algoritmo Transposición.</h5><hr>
+        <p class="card-text"> <small class="text-muted"> Se descifra el algorimo de Transposición. </small></p>
+        <a href="{% url 'transposicionDecryp' %}" class="btn btn-primary">Leer mas</a>
+      </div>
+  </div>
+
+</div>
+{% endblock %}

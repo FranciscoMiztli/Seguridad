@@ -1,0 +1,133 @@
+{% extends "home/base.html" %}
+
+{% block title %}
+  Genera Password
+{% endblock %}
+
+{% block content %}
+
+<div class="container">
+  <div class="accordion" id="contrae">
+  <div class="card">
+      <div class="card-header" id="headingOne">
+      <h2 class="mb-0">
+        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+            <h4 class="display-6 ">Generación de password seguros.</h4>
+        </button>
+      </h2>
+    </div>
+      {% if error or error1 %}
+        <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#contrae">
+      {% else %}
+        <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#contrae">
+      {% endif %}
+      <div class="card-body">
+        <p class="lead">
+          Función que genera una conraseña segura a partir de un parametro obligatorio (Tamaño de la contraseña)
+          y como parametros opcionales Letras mayúsculas, números, y caracteres especiales.
+        </p>
+      </div>
+    </div>
+  </div>
+
+
+
+  <div class="card">
+    <div class="card-header" id="headingTwo">
+      <h2 class="mb-0">
+        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+          <h4 class="display-6 ">Ver Código.</h4>
+        </button>
+      </h2>
+    </div>
+    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#contrae">
+      <div class="card-body">
+        <code>
+          <strong>
+              <pre>
+import string
+from random import randint, choice
+def generaPassword(long, mayus = False, num = False, especial = False):
+  letters = list(string.ascii_lowercase)
+  if(mayus):
+    letters.extend(list(string.ascii_uppercase))
+  if(num):
+    letters.extend(list(string.digits))
+  if(especial):
+    letters.extend(list(string.punctuation))
+
+  return ("").join(choice(letters)for i in range(long))
+              </pre>
+            </strong>
+        </code>
+      </div>
+    </div>
+  </div>
+
+
+
+  <div class="card">
+    {% if error or error1 %}
+      <div class="card-header" id="headingOne">
+    {% else %}
+      <div class="card-header" id="headingThree">
+    {% endif %}
+      <h2 class="mb-0">
+        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+          <h4 class="display-6 ">Pruébame.</h4>
+        </button>
+      </h2>
+    </div>
+      {% if error or error1 %}
+        <div id="collapseThree" class="collapse show" aria-labelledby="headingThree" data-parent="#contrae">
+      {% else %}
+        <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#contrae">
+      {% endif %}
+      <div class="card-body">
+        <div class="container text-center">
+          <form action="{% url 'password' %}" method="post">{% csrf_token %}
+            <div class="col-sm-4 offset-sm-4 ">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">Tamaño:</span>
+                </div>
+                <select name="longitud" class="custom-select">
+                  <option selected>Longitud </option>
+                  {% for x in rango %}
+                    <option value="{{x}}">{{x}}</option>
+                  {% endfor %}
+                </select>
+              </div>
+              {% if error %}
+              <p class="alert alert-warning">Introduce un valor.</p>
+              {% endif %}
+            </div>
+            <br>
+            <div class="col-md-4 offset-md-4 ">
+              <input type="checkbox" aria-label="Checkbox for following text input" name="Upper">
+              <label for="Upper">Mayúsculas.</label>
+              <br>
+            </div>
+            <div class="col-md-4 offset-md-4 ">
+              <input type="checkbox" aria-label="Checkbox for following text input" name="Digitos">
+              <label for="Digitos">Números. &nbsp&nbsp&nbsp</label>
+              <br>
+            </div>
+            <div class="col-md-4 offset-md-4 ">
+              <input type="checkbox" aria-label="Checkbox for following text input" name="Especial">
+              <label for="Especial">Especiales.&nbsp</label>
+              <br>
+            </div>
+            <div class="col-md-4 offset-md-4 ">
+              <input type="submit" value="Generar Password" class="btn btn-primary">
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+
+{% endblock %}

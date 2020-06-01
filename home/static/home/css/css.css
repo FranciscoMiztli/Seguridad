@@ -1,0 +1,125 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+body{
+    background-image: url("../img/Fondo.png") !important;
+}
+
+.dropdown-item{
+  color: white !important;
+}
+
+.nav-item > a{
+  color: white !important;
+}
+
+.dropdown-item {
+  color: deepskyblue !important;
+}
+
+.nav-item > a {
+  color: deepskyblue !important;
+}
+
+.panel-heading{
+    background-color: #2b2b2b !important;
+    color: white !important;
+}
+
+.panel-body{
+    color: #2b2b2b !important;
+}
+
+.navbar{
+    background-color: #2b2b2b !important;
+    box-shadow: 5px 5px 10px #555;
+}
+
+.navbar-brand:link, .navbar-brand:visited{
+    color: deepskyblue !important;
+}
+
+.navbar-brand:hover, .navbar-brand:active{
+    color: white !important;
+}
+
+#navbar li a:link, #navbar li a:visited{
+    color: white !important;
+    background-color: #2b2b2b !important;
+}
+
+#navbar li a:hover, #navbar li a:active{
+    color: deepskyblue !important;
+}
+
+.dropdown-menu{
+    background-color: #2b2b2b !important;
+}
+
+.open > a{
+    background-color: #2b2b2b !important;
+}
+
+#navbar li:hover > ul{
+    display: block;
+}
+
+.list-group-item{
+    padding-right: -15px !important;
+    margin-right: 0px !important;
+}
+
+
+
+.Esconde{
+    display: none !important;
+}
+
+
+
+
+
+
+.flex-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.flex-container > div {
+  margin: 10px;
+  text-align: center;
+}
+
+@media (min-width: 200px) {
+  .flex-container > div {
+    width: 90%;
+  }
+}
+
+@media (min-width: 576px) {
+  .flex-container > div {
+    width: 45%;
+  }
+}
+
+@media (min-width: 768px) {
+  .flex-container > div {
+    width: 30%;
+  }
+}
+
+@media (min-width: 992px) {
+  .flex-container > div {
+    width: 20%;
+  }
+}
+
+@media (min-width: 1200px) {
+  .flex-container > div {
+    width: 17%;
+  }
+}

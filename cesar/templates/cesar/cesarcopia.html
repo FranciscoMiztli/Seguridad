@@ -1,0 +1,108 @@
+{% extends "home/base.html" %}
+
+  {% block title %}
+    Cesar
+  {% endblock %}
+
+  {% block content %}
+
+    {% include "home/apps.html" %}
+
+      {% block titleHead %}
+        Encriptacion por método Cesar
+      {% endblock %}
+
+      {% block descripcion %}
+        <p class="lead">
+          Es un tipo de cifrado por sustitución en el que una letra en el texto original es
+          reemplazada por otra letra que se encuentra un número fijo de posiciones más adelante en el alfabeto.
+          <br>
+        </p><strong>Ten en cuenta que la letra 'Ñ' no se toma en cuenta.</strong>
+      {% endblock %}
+
+      {% block cuerpo %}
+      <form action="{% url 'cesarEncrypted' %}" method="post">{% csrf_token %}
+        <div class="col-sm-2 offset-sm-5 ">
+          <select name="desplazamiento" class="custom-select">
+            <option selected>Desplazamiento </option>
+            {% for x in desplaza %}
+              <option value="{{x}}">{{x}}</option>
+            {% endfor %}
+          </select>
+          {% if error %}
+          <p class="alert alert-warning">Selecciona un Desplazamiento.</p>
+          {% endif %}
+        </div>
+        <br>
+        <div class="col-sm-4 offset-sm-4 ">
+          <div class="input-group">
+            <div class="input-group-prepend">
+            <span class="input-group-text">Mensaje:</span>
+            </div>
+            <textarea class="form-control" aria-label="With textarea" placeholder="mensaje" name="mensaje"></textarea>
+          </div>
+          {% if error2 %}
+          <p class="alert alert-warning">El mensaje no puede estar vacio.</p>
+          {% endif %}
+        </div>
+        <br>
+        <div class="col-md-6 offset-md-3 ">
+        <input type="submit" value="Generar Password" class="btn btn-primary">
+        </div>
+      </form>
+      {% endblock %}
+      {% endblock %}
+  {% endblock %}
+
+
+<!--
+<div class="container">
+  <div class="row-2">
+    <div class="jumbotron jumbotron-fluid">
+      <div class="container">
+        <h1 class="display-5">Encriptacion por método Cesar</h1>
+        <p class="lead">
+          Es un tipo de cifrado por sustitución en el que una letra en el texto original es
+          reemplazada por otra letra que se encuentra un número fijo de posiciones más adelante en el alfabeto.
+          <br>
+        </p><strong>Ten en cuenta que la letra 'Ñ' no se toma en cuenta.</strong>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row-10">
+  <div class="container text-center">
+    <form action="{% url 'cesarEncrypted' %}" method="post">{% csrf_token %}
+      <div class="col-sm-2 offset-sm-5 ">
+        <select name="desplazamiento" class="custom-select">
+          <option selected>Desplazamiento </option>
+          {% for x in desplaza %}
+            <option value="{{x}}">{{x}}</option>
+          {% endfor %}
+        </select>
+        {% if error %}
+        <p class="alert alert-warning">Selecciona un Desplazamiento.</p>
+        {% endif %}
+      </div>
+      <br>
+      <div class="col-sm-4 offset-sm-4 ">
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text">Mensaje:</span>
+        </div>
+        <textarea class="form-control" aria-label="With textarea" placeholder="mensaje" name="mensaje"></textarea>
+      </div>
+      {% if error2 %}
+      <p class="alert alert-warning">El mensaje no puede estar vacio.</p>
+      {% endif %}
+      </div>
+      <br>
+      <div class="col-md-6 offset-md-3 ">
+        <input type="submit" value="Generar Password" class="btn btn-primary">
+      </div>
+    </form>
+  </div>
+</div>
+
+--!>

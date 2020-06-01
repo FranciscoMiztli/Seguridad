@@ -1,0 +1,128 @@
+{% extends "home/base.html" %}
+
+{% block title %}
+  Transposición Descifrar
+{% endblock %}
+
+{% block content %}
+
+<div class="container">
+  <div class="accordion" id="contrae">
+  <div class="card">
+      <div class="card-header" id="headingOne">
+      <h2 class="mb-0">
+        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+            <h4 class="display-6 ">Descifrado por Transposición.</h4>
+        </button>
+      </h2>
+    </div>
+      {% if error or error1 %}
+        <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#contrae">
+      {% else %}
+        <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#contrae">
+      {% endif %}
+      <div class="card-body">
+        <p class="lead">
+          Obtiene el mensaje oculto del cifrado de Transposición.
+          Es un tipo de cifrado en el que unidades de texto plano se cambian de posición siguiendo un esquema
+          bien definido(Matriz cuadrada de tamaño nxn).
+        </p>
+      </div>
+    </div>
+  </div>
+
+
+
+  <div class="card">
+    <div class="card-header" id="headingTwo">
+      <h2 class="mb-0">
+        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+          <h4 class="display-6 ">Ver Código.</h4>
+        </button>
+      </h2>
+    </div>
+    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#contrae">
+      <div class="card-body">
+        <code>
+          <strong>
+              <pre>
+import string
+
+def decryp(mensaje):
+    tam = int( len(mensaje) ** (1/2) )
+    mensaje = ("").join(mensaje[ ((i[0] * tam) % len(mensaje)) + int(i[0] * tam / len(mensaje)) ]for i in enumerate(mensaje))
+    return mensaje
+              </pre>
+            </strong>
+        </code>
+      </div>
+    </div>
+  </div>
+
+
+
+  <div class="card">
+    {% if error or error1 or error4 %}
+      <div class="card-header" id="headingOne">
+    {% else %}
+      <div class="card-header" id="headingThree">
+    {% endif %}
+      <h2 class="mb-0">
+        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+          <h4 class="display-6 ">Pruébame.</h4>
+        </button>
+      </h2>
+    </div>
+      {% if error or error1 or error4 %}
+        <div id="collapseThree" class="collapse show" aria-labelledby="headingThree" data-parent="#contrae">
+      {% else %}
+        <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#contrae">
+      {% endif %}
+      <div class="card-body">
+        <div class="container text-center">
+          <form action="{% url 'transposicionDecryp' %}" method="post">{% csrf_token %}
+            <div class="col-sm-4 offset-sm-4 ">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">Key/Matriz:</span>
+                </div>
+                <select name="matriz" class="custom-select">
+                  <option selected>Desplazamiento </option>
+                  {% for x in desplaza %}
+                    <option value="{{x}}">{{x}}</option>
+                  {% endfor %}
+                </select>
+              </div>
+              {% if error %}
+              <p class="alert alert-warning">Selecciona un tamaño de matriz adecuado.</p>
+              {% endif %}
+              {% if error4 %}
+              <p class="alert alert-warning">El mensaje no coincide con el tamaño de la matriz.</p>
+              {% endif %}
+            </div>
+            <br>
+            <div class="col-sm-4 offset-sm-4 ">
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text">Mensaje:</span>
+              </div>
+              <textarea class="form-control" aria-label="With textarea" placeholder="mensaje" name="mensaje"></textarea>
+            </div>
+            {% if error1 %}
+            <p class="alert alert-warning">El mensaje no puede estar vacio.</p>
+            {% endif %}
+            </div>
+            <br>
+            <div class="col-md-6 offset-md-3 ">
+              <input type="submit" value="Encriptar mensaje." class="btn btn-primary">
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+
+{% endblock %}

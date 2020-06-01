@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es" dir="ltr">
+<head>
+  <meta charset="utf-8">
+
+  <title>
+    {% block title %}
+    {% endblock %}
+  </title>
+
+  {% load static %}
+  <link rel="stylesheet" type="text/css" href="{% static 'home/css/bootstrap.min.css' %}">
+  {% load static %}
+  <link rel="stylesheet" type="text/css" href="{% static 'home/css/css.css' %}">
+
+  {% block css %}
+  {% endblock %}
+
+</head>
+
+<body>
+  <div class="container">
+    <nav class="navbar navbar-fluid navbar-expand-lg navbar-dark bg-dark">
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="{% url 'home' %}">Home <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Algoritmo Cesar
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="{% url 'cesar' %}">Encriptar</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="{% url 'cesarDecrypted' %}">Desencriptar</a>
+            </div>
+          </li>
+
+
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'genPassword' %}">Password Seguros</a>
+          </li>
+
+
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Transposición
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="{% url 'transposicion' %}">Encriptar</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="{% url 'transposicionDecryp' %}">Desencriptar</a>
+            </div>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'portada' %}">Portada</a>
+          </li>
+
+
+
+
+
+        </ul>
+      </div>
+    </nav>
+  </div>
+
+  {% block content %}
+  {% endblock %}
+
+  {% load static %}
+  <script src="{% static 'home/js/jquery.js' %}" charset="utf-8"></script></script>
+  {% load static %}
+  <script src="{% static 'home/js/bootstrap.min.js' %}" charset="utf-8"></script></script>
+  {% block js %}
+  {% endblock %}
+
+</body>
+</html>

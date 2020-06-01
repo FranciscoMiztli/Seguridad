@@ -1,0 +1,29 @@
+{% extends "home/base.html" %}
+
+{% block title %}
+  Cesar Descifrado
+{% endblock %}
+
+{% block content %}
+
+<div class="container">
+  <table class="table table-">
+    <thead>
+      <tr>
+        <th scope="col">LLave.</th>
+        <th scope="col">Mensaje Descifrado.</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for mensaje in mensajes %}
+        <tr>
+          <th scope="row">{{ mensaje.1 }}</th>
+          <th >{{ mensaje.0 }}</th>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+
+{% endblock %}
